@@ -1,4 +1,4 @@
-package com.prdemo.a829886.projectdemo
+package com.prdemo.a829886.projectdemo.adapters
 
 import android.content.Context
 import android.os.Build
@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.prdemo.a829886.projectdemo.R
 import com.prdemo.a829886.projectdemo.databinding.CusStateItemBinding
+import com.prdemo.a829886.projectdemo.model.BioGraphicData
+import com.prdemo.a829886.projectdemo.model.StateInfo
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-class StateAdapter(val context: Context, private val stateList : ArrayList<States>) : RecyclerView.Adapter<StateAdapter.StateViewHolder>() {
+class StateAdapter(val context: Context, bioGraphicData: BioGraphicData) : RecyclerView.Adapter<StateAdapter.StateViewHolder>() {
 
+    private var stateList : ArrayList<StateInfo> = bioGraphicData.rows!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StateViewHolder {
-        val cusStateItemBinding : CusStateItemBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.cus_state_item,parent,false)
+        val cusStateItemBinding : CusStateItemBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.cus_state_item,parent,false)
         return StateViewHolder(cusStateItemBinding)
     }
 
@@ -27,12 +31,11 @@ class StateAdapter(val context: Context, private val stateList : ArrayList<State
         holder.setBind(states)
     }
 
-
     class StateViewHolder(private var stateItemBinding: CusStateItemBinding) : RecyclerView.ViewHolder(stateItemBinding.root) {
 
         var itemDp : CircleImageView? = null
 
-        fun setBind(stateObj : States) {
+        fun setBind(stateObj : StateInfo) {
             stateItemBinding.state = stateObj
             itemDp = stateItemBinding.itemDp
 

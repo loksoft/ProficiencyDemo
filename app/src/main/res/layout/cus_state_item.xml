@@ -5,7 +5,7 @@
     <data>
         <variable
             name="state"
-            type="com.prdemo.a829886.projectdemo.States" />
+            type="com.prdemo.a829886.projectdemo.model.StateInfo" />
 
         <variable
             name="description"

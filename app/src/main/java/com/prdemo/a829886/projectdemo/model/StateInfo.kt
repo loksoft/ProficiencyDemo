@@ -1,6 +1,6 @@
-package com.prdemo.a829886.projectdemo
+package com.prdemo.a829886.projectdemo.model
 
-class States {
+class StateInfo {
     var title = ""
     var description = ""
     var imageHref = ""
