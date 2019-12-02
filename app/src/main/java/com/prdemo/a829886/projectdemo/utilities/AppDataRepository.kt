@@ -9,6 +9,10 @@ import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * This will make service call and parse either of error or success response
+ */
+
 class AppDataRepository {
     private val baseUrl = "https://dl.dropboxusercontent.com/"
     private val liveData: MutableLiveData<State> = MutableLiveData()
