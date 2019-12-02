@@ -2,6 +2,7 @@ package com.prdemo.a829886.projectdemo.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -14,11 +15,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.prdemo.a829886.projectdemo.R
 import com.prdemo.a829886.projectdemo.adapters.StateAdapter
 import com.prdemo.a829886.projectdemo.databinding.ActivityMainBinding
-import com.prdemo.a829886.projectdemo.model.BioGraphicData
+import com.prdemo.a829886.projectdemo.model.State
+import com.prdemo.a829886.projectdemo.utilities.AppDataRepository
 import com.prdemo.a829886.projectdemo.viewmodel.AppViewModel
 
 
-class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, Observer<BioGraphicData> {
+class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, Observer<State>, AppDataRepository.ServerCallListener {
 
     private lateinit var recyclerView: RecyclerView
     private var actionBar: ActionBar? = null
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         initResources()
         appViewModel = ViewModelProviders.of(this).get(AppViewModel::class.java)
-        appViewModel.getHeroes().observe(this, this)
+        appViewModel.getData(this).observe(this, this)
     }
 
     private fun initResources() {
@@ -47,15 +49,21 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
     /**
      * This method will provide live data with respect to activity scope
      */
-    override fun onChanged(bioGraphicData: BioGraphicData?) {
+    override fun onChanged(state: State?) {
         activityMainBinding.visibleStatus = View.GONE
         refreshPage.isRefreshing = false
-        actionBar?.title = bioGraphicData?.title
-        val stateAdapter = StateAdapter(bioGraphicData!!)
+        actionBar?.title = state?.title
+        val stateAdapter = StateAdapter(state!!)
         recyclerView.adapter = stateAdapter
     }
 
     override fun onRefresh() {
-        appViewModel.getHeroes().observe(this, this)
+        appViewModel.getData(this).observe(this, this)
+    }
+
+    override fun onErrorTriggered() {
+        activityMainBinding.visibleStatus = View.GONE
+        refreshPage.isRefreshing = false
+        Toast.makeText(this,resources.getString(R.string.server_call_error_response), Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProjectDemo</string>
+    <string name="server_call_error_response">Problem occurred while fetching data.</string>
 </resources>

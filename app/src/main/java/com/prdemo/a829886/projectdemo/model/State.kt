@@ -1,6 +1,6 @@
 package com.prdemo.a829886.projectdemo.model
 
-class BioGraphicData {
+class State {
     var title : String =""
-    var rows : ArrayList<StateInfo> ? = null
+    var rows : ArrayList<StateStructure> ? = null
 }

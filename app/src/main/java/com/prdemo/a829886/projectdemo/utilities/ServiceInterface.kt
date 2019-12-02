@@ -1,6 +1,6 @@
 package com.prdemo.a829886.projectdemo.utilities
 
-import com.prdemo.a829886.projectdemo.model.BioGraphicData
+import com.prdemo.a829886.projectdemo.model.State
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -9,5 +9,5 @@ import retrofit2.http.GET
  */
 interface ServiceInterface {
     @GET("s/2iodh4vg0eortkl/facts.js")
-    fun getHeroes(): Call<BioGraphicData>
+    fun getStateDemoGraphicData(): Call<State>
 }
