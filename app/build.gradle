@@ -25,8 +25,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    defaultConfig { multiDexEnabled true }
-
     dataBinding{
         enabled true
     }
@@ -34,24 +32,24 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
-    implementation 'com.google.android.material:material:1.0.0-alpha1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
-    implementation 'androidx.work:work-runtime:2.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.71'
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
+    implementation "androidx.appcompat:appcompat:${ver.appcompact}"
+    implementation "androidx.constraintlayout:constraintlayout:${ver.constraint_layout}"
+    implementation "com.google.android.material:material:${ver.material}"
+    testImplementation "junit:junit:${ver.junit}"
+    androidTestImplementation "androidx.test:runner:${ver.test_runner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${ver.espresso}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${ver.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:${ver.kotlin}"
+    implementation "androidx.recyclerview:recyclerview:${ver.recyclerview}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${ver.life_cycles}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${ver.life_cycles}"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:${ver.swipe_refresh_layout}"
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation "com.squareup.retrofit2:retrofit:${ver.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${ver.retrofit}"
 
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation "de.hdodenhof:circleimageview:${ver.circle_image}"
+    implementation "com.squareup.picasso:picasso:${ver.picasso}"
 }
 repositories {
     mavenCentral()

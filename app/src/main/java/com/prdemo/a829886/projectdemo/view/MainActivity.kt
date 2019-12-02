@@ -20,38 +20,42 @@ import com.prdemo.a829886.projectdemo.viewmodel.AppViewModel
 
 class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, Observer<BioGraphicData> {
 
-    private var recyclerView: RecyclerView? = null
+    private lateinit var recyclerView: RecyclerView
     private var actionBar: ActionBar? = null
-    private var refreshPage: SwipeRefreshLayout? = null
-    private var appViewModel: AppViewModel? = null
-    private var activityMainBinding: ActivityMainBinding ? = null
+    private lateinit var refreshPage: SwipeRefreshLayout
+    private lateinit var appViewModel: AppViewModel
+    private lateinit var activityMainBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        actionBar = supportActionBar
-        recyclerView = activityMainBinding?.mainList
-        refreshPage = activityMainBinding?.refreshPage
-        refreshPage?.setOnRefreshListener(this)
-        recyclerView?.layoutManager = LinearLayoutManager(this)
-        recyclerView?.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        activityMainBinding?.visibleStatus = View.VISIBLE
+        initResources()
         appViewModel = ViewModelProviders.of(this).get(AppViewModel::class.java)
-        appViewModel?.getHeroes()?.observe(this, this)
+        appViewModel.getHeroes().observe(this, this)
+    }
+
+    private fun initResources() {
+        actionBar = supportActionBar
+        recyclerView = activityMainBinding.mainList
+        refreshPage = activityMainBinding.refreshPage
+        refreshPage.setOnRefreshListener(this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        activityMainBinding.visibleStatus = View.VISIBLE
     }
 
     /**
-     * This method will provide live data
+     * This method will provide live data with respect to activity scope
      */
     override fun onChanged(bioGraphicData: BioGraphicData?) {
-        activityMainBinding?.visibleStatus = View.GONE
-        refreshPage?.isRefreshing = false
+        activityMainBinding.visibleStatus = View.GONE
+        refreshPage.isRefreshing = false
         actionBar?.title = bioGraphicData?.title
-        val stateAdapter = StateAdapter(this@MainActivity, bioGraphicData!!)
-        recyclerView?.adapter = stateAdapter
+        val stateAdapter = StateAdapter(bioGraphicData!!)
+        recyclerView.adapter = stateAdapter
     }
 
     override fun onRefresh() {
-        appViewModel?.getHeroes()?.observe(this, this)
+        appViewModel.getHeroes().observe(this, this)
     }
 }
