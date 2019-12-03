@@ -15,7 +15,8 @@ buildscript {
             junit               : '4.12',
             material            : '1.2.0-alpha02',
             test_runner         : '1.1.0-alpha3',
-            swipe_refresh_layout: '1.0.0'
+            swipe_refresh_layout: '1.0.0',
+            mock_server         : '4.2.1'
     ]
 
     repositories {

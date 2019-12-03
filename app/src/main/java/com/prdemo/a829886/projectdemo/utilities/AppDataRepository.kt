@@ -14,7 +14,11 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 
 class AppDataRepository {
-    private val baseUrl = "https://dl.dropboxusercontent.com/"
+
+    companion object {
+        const val BASE_URL = "https://dl.dropboxusercontent.com/"
+    }
+
     private val liveData: MutableLiveData<State> = MutableLiveData()
     var serverCallListener: ServerCallListener? = null
 
@@ -26,7 +30,7 @@ class AppDataRepository {
 
     private fun loadData() {
         val retrofit = Retrofit.Builder()
-                .baseUrl(baseUrl)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 

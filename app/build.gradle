@@ -20,14 +20,15 @@ android {
         }
     }
 
-    compileOptions{
+    compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    dataBinding{
+    dataBinding {
         enabled true
     }
+    sourceSets { main { resources.srcDirs = ['src/main/resources', 'src/test/resources/'] } }
 }
 
 dependencies {
@@ -47,6 +48,7 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:${ver.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${ver.retrofit}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${ver.mock_server}"
 
     implementation "de.hdodenhof:circleimageview:${ver.circle_image}"
     implementation "com.squareup.picasso:picasso:${ver.picasso}"
