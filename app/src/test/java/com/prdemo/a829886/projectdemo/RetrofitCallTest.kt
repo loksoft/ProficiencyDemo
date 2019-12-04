@@ -1,6 +1,7 @@
 package com.prdemo.a829886.projectdemo
 
-import com.prdemo.a829886.projectdemo.model.AppDataRepository
+import com.prdemo.a829886.projectdemo.datasource.AppDataRepository
+import com.prdemo.a829886.projectdemo.utilities.AppUtils
 import com.prdemo.a829886.projectdemo.utilities.ServiceInterface
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -18,7 +19,7 @@ class RetrofitCallTest {
         val mockWebServer = MockWebServer()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(mockWebServer.url(AppDataRepository.BASE_URL).toString())
+                .baseUrl(mockWebServer.url(AppUtils.BASE_URL).toString())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val inputStream = this.javaClass.classLoader.getResourceAsStream("mock_response.json")

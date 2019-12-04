@@ -19,7 +19,7 @@ import java.util.*
 
 class StateAdapter(state: State) : RecyclerView.Adapter<StateAdapter.StateViewHolder>() {
 
-    private var stateList: ArrayList<StateStructure> = state.rows!!
+    private var stateList: ArrayList<StateStructure> ? = state.rows
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StateViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.cus_state_item, parent, false)
@@ -27,18 +27,18 @@ class StateAdapter(state: State) : RecyclerView.Adapter<StateAdapter.StateViewHo
     }
 
     override fun onBindViewHolder(holder: StateViewHolder, position: Int) {
-        val stateInfo: StateStructure = stateList[position]
-        holder.titleText.text = stateInfo.title
-        holder.descriptionText.visibility = (if (!TextUtils.isEmpty(stateInfo.description))
+        val stateInfo: StateStructure ? = stateList?.get(position)
+        holder.titleText.text = stateInfo?.title
+        holder.descriptionText.visibility = (if (!TextUtils.isEmpty(stateInfo?.description))
             View.VISIBLE.apply {
-                holder.descriptionText.text = stateInfo.description
+                holder.descriptionText.text = stateInfo?.description
             }
         else View.GONE)
-        Picasso.get().load(stateInfo.imageHref).placeholder(R.drawable.ic_launcher_foreground).into(holder.itemDp)
+        Picasso.get().load(stateInfo?.imageHref).placeholder(R.drawable.ic_launcher_foreground).into(holder.itemDp)
     }
 
     override fun getItemCount(): Int {
-        return stateList.size
+        return stateList!!.size
     }
 
     class StateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

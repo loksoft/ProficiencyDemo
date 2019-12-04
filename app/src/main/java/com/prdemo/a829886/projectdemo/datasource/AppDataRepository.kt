@@ -1,31 +1,20 @@
-package com.prdemo.a829886.projectdemo.model
+package com.prdemo.a829886.projectdemo.datasource
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.prdemo.a829886.projectdemo.model.State
 import com.prdemo.a829886.projectdemo.utilities.AppUtils
 import com.prdemo.a829886.projectdemo.utilities.ServiceInterface
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * This will make service call and parse either of error or success response
  */
 
 class AppDataRepository {
-
-    companion object {
-        const val BASE_URL = "https://dl.dropboxusercontent.com/"
-        private val retrofit: Retrofit? = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        private val api = retrofit?.create(ServiceInterface::class.java)
-        val call = api?.getStateDemoGraphicData()
-    }
-
+    private val api = AppUtils.getRetrofitInstance()?.create(ServiceInterface::class.java)
     private val liveData: MutableLiveData<State> = MutableLiveData()
     var serverCallListener: ServerCallListener? = null
     private var context: Context? = null
@@ -39,7 +28,8 @@ class AppDataRepository {
 
     private fun loadData() {
         if (AppUtils.checkNetworkAvailability(context!!)) {
-            call?.clone()?.enqueue(object : Callback<State> {
+            val call = api?.getStateDemoGraphicData()
+            call?.enqueue(object : Callback<State> {
                 override fun onFailure(call: Call<State>, t: Throwable) {
                     if (serverCallListener != null) {
                         serverCallListener?.onErrorTriggered()

@@ -3,7 +3,7 @@ package com.prdemo.a829886.projectdemo.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.prdemo.a829886.projectdemo.model.AppDataRepository
+import com.prdemo.a829886.projectdemo.datasource.AppDataRepository
 import com.prdemo.a829886.projectdemo.model.State
 
 /**

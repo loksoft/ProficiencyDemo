@@ -6,9 +6,12 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.text.TextUtils
 import com.prdemo.a829886.projectdemo.model.State
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class AppUtils {
     companion object {
+        const val BASE_URL = "https://dl.dropboxusercontent.com/"
         @SuppressLint("NewApi")
         fun checkNetworkAvailability(context: Context): Boolean {
             val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -29,6 +32,13 @@ class AppUtils {
                     iterator.remove()
                 }
             }
+        }
+
+        fun getRetrofitInstance() : Retrofit? {
+            return Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
         }
     }
 }

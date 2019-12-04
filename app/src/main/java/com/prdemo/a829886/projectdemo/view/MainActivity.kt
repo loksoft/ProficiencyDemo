@@ -16,7 +16,7 @@ import com.prdemo.a829886.projectdemo.R
 import com.prdemo.a829886.projectdemo.adapters.StateAdapter
 import com.prdemo.a829886.projectdemo.databinding.ActivityMainBinding
 import com.prdemo.a829886.projectdemo.model.State
-import com.prdemo.a829886.projectdemo.model.AppDataRepository
+import com.prdemo.a829886.projectdemo.datasource.AppDataRepository
 import com.prdemo.a829886.projectdemo.viewmodel.AppViewModel
 
 /**
