@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         actionBar?.title = state?.title
         val stateAdapter = StateAdapter(state!!)
         recyclerView.adapter = stateAdapter
+        recyclerView.invalidate()
     }
 
     override fun onRefresh() {
