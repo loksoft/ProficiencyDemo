@@ -27,7 +27,7 @@ class AppDataRepository {
     }
 
     private fun loadData() {
-        if (AppUtils.checkNetworkAvailability(context!!)) {
+        if (AppUtils.checkNetworkAvailability(context)) {
             val call = api?.getStateDemoGraphicData()
             call?.enqueue(object : Callback<State> {
                 override fun onFailure(call: Call<State>, t: Throwable) {
@@ -38,7 +38,7 @@ class AppDataRepository {
 
                 override fun onResponse(call: Call<State>, response: retrofit2.Response<State>) {
                     val state: State? = response.body()
-                    AppUtils.removeEmptyItems(state!!)
+                    AppUtils.removeEmptyItems(state)
                     liveData.value = state
                 }
             })

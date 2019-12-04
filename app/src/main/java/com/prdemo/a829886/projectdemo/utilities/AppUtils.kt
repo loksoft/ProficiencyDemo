@@ -13,8 +13,8 @@ class AppUtils {
     companion object {
         const val BASE_URL = "https://dl.dropboxusercontent.com/"
         @SuppressLint("NewApi")
-        fun checkNetworkAvailability(context: Context): Boolean {
-            val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        fun checkNetworkAvailability(context: Context?): Boolean {
+            val connectivityManager = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val nw = connectivityManager.activeNetwork ?: return false
             val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
             return when {
@@ -24,8 +24,10 @@ class AppUtils {
             }
         }
 
-        fun removeEmptyItems(state: State) {
-            val iterator = state.rows?.iterator()
+        fun removeEmptyItems(state: State?) {
+            val iterator = state?.let {
+                it.rows?.iterator()
+            }
             while (iterator!!.hasNext()) {
                 val stateStructure = iterator.next()
                 if (TextUtils.isEmpty(stateStructure.title) && TextUtils.isEmpty(stateStructure.description) && TextUtils.isEmpty(stateStructure.imageHref)) {
