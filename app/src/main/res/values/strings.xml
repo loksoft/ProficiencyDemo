@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ProjectDemo</string>
     <string name="server_call_error_response">Problem occurred while fetching data.</string>
+    <string name="network_error_message">Please check your network connection and try again.</string>
 </resources>

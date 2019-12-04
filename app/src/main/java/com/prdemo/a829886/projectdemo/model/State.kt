@@ -1,6 +1,3 @@
 package com.prdemo.a829886.projectdemo.model
 
-class State {
-    var title : String =""
-    var rows : ArrayList<StateStructure> ? = null
-}
+data class State(val title: String = "", val rows: ArrayList<StateStructure>? = null)

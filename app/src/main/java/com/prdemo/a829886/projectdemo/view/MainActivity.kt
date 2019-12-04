@@ -16,9 +16,12 @@ import com.prdemo.a829886.projectdemo.R
 import com.prdemo.a829886.projectdemo.adapters.StateAdapter
 import com.prdemo.a829886.projectdemo.databinding.ActivityMainBinding
 import com.prdemo.a829886.projectdemo.model.State
-import com.prdemo.a829886.projectdemo.utilities.AppDataRepository
+import com.prdemo.a829886.projectdemo.model.AppDataRepository
 import com.prdemo.a829886.projectdemo.viewmodel.AppViewModel
 
+/**
+ * Main activity to bind recycler view with data
+ */
 
 class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, Observer<State>, AppDataRepository.ServerCallListener {
 
@@ -33,7 +36,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         initResources()
         appViewModel = ViewModelProviders.of(this).get(AppViewModel::class.java)
-        appViewModel.getData(this).observe(this, this)
+        appViewModel.getLiveData(this).observe(this, this)
     }
 
     private fun initResources() {
@@ -58,12 +61,18 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
     }
 
     override fun onRefresh() {
-        appViewModel.getData(this).observe(this, this)
+        appViewModel.getLiveData(this).observe(this, this)
     }
 
     override fun onErrorTriggered() {
         activityMainBinding.visibleStatus = View.GONE
         refreshPage.isRefreshing = false
         Toast.makeText(this,resources.getString(R.string.server_call_error_response), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNetworkErrorTriggered() {
+        activityMainBinding.visibleStatus = View.GONE
+        refreshPage.isRefreshing = false
+        Toast.makeText(this,resources.getString(R.string.network_error_message), Toast.LENGTH_SHORT).show()
     }
 }

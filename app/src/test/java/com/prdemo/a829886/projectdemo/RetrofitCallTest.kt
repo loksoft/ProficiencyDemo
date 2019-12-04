@@ -1,6 +1,6 @@
 package com.prdemo.a829886.projectdemo
 
-import com.prdemo.a829886.projectdemo.utilities.AppDataRepository
+import com.prdemo.a829886.projectdemo.model.AppDataRepository
 import com.prdemo.a829886.projectdemo.utilities.ServiceInterface
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
